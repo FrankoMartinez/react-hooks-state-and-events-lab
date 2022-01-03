@@ -5,13 +5,14 @@ function ShoppingList({ items }) {
   const [selectedCategory, setCategory] = useState("All")
   // Use selectedCategory to filter out items that don't match and render the items that do
   const filteredItems = items.filter(item => {
+    if (selectedCategory === "All") {
+      return true
+    }
     return item.category === selectedCategory
   })
 
   function changeCaterogy(event) {
-    console.log(selectedCategory)
     setCategory(event.target.value)
-    console.log(filteredItems)
   }
 
   return (
@@ -25,7 +26,7 @@ function ShoppingList({ items }) {
         </select>
       </div>
       <ul className="Items">
-        {items.map((item) => (
+        {filteredItems.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
         ))}
       </ul>
@@ -34,3 +35,11 @@ function ShoppingList({ items }) {
 }
 
 export default ShoppingList;
+
+
+
+
+
+// {items.map((item) => (
+//   <Item key={item.id} name={item.name} category={item.category} />
+// ))}

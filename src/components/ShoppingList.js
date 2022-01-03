@@ -3,10 +3,15 @@ import Item from "./Item";
 
 function ShoppingList({ items }) {
   const [selectedCategory, setCategory] = useState("All")
-  const category = ["Produce", "Dairy", "Dessert"]
-  
-  function changeCaterogy() {
+  // Use selectedCategory to filter out items that don't match and render the items that do
+  const filteredItems = items.filter(item => {
+    return item.category === selectedCategory
+  })
+
+  function changeCaterogy(event) {
     console.log(selectedCategory)
+    setCategory(event.target.value)
+    console.log(filteredItems)
   }
 
   return (
